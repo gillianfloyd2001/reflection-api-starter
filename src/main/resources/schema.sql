@@ -43,3 +43,15 @@ CREATE TABLE IF NOT EXISTS reflections (
     id SERIAL PRIMARY KEY,
     date DATE NOT NULL UNIQUE
 );
+
+CREATE TABLE IF NOT EXISTS questions (
+    id SERIAL PRIMARY KEY,
+    prompt TEXT NOT NULL,
+    reflection_id INTEGER NOT NULL REFERENCES reflections(id)
+);
+
+CREATE TABLE IF NOT EXISTS responses (
+    id SERIAL PRIMARY KEY,
+    username TEXT NOT NULL,
+    reflection_id INTEGER NOT NULL REFERENCES reflections(id)
+);
