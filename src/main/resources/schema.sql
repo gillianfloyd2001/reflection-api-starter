@@ -55,3 +55,10 @@ CREATE TABLE IF NOT EXISTS responses (
     username TEXT NOT NULL,
     reflection_id INTEGER NOT NULL REFERENCES reflections(id)
 );
+
+CREATE TABLE IF NOT EXISTS answers (
+  id SERIAL PRIMARY KEY UNIQUE,
+  response_id INTEGER REFERENCES responses(id),
+  question_id INTEGER REFERENCES questions(id),
+  content TEXT NOT NULL
+);

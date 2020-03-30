@@ -16,7 +16,7 @@ public class QuestionRepository {
     public JdbcTemplate jdbc;
 
     public List<Question> all() {
-        return jdbc.query("SELECT * FROM questions", this::mapper);
+        return jdbc.query("SELECT * FROM questions ", this::mapper);
     }
 
     public Question create(Question question) {
@@ -36,6 +36,14 @@ public class QuestionRepository {
 
     public void delete(Integer id) {
         jdbc.query("DELETE FROM questions WHERE id = ? RETURNING *", this::mapper, id);
+    }
+
+    public List<Question> forReflection(Integer reflectionId) {
+        return jdbc.query(
+                "SELECT * FROM questions WHERE reflection_id = ?",
+                this::mapper,
+                reflectionId
+        );
     }
 
     private Question mapper(ResultSet resultSet, int i) throws SQLException {

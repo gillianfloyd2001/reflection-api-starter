@@ -14,10 +14,13 @@ public class ResponseController {
 
     public ResponseRepository responses;
 
-    @PostMapping ("/reflections/{reflection_id}/responses")
+    @PostMapping ("/reflections/{reflectionId}/responses")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response create(@RequestBody Response response) {return responses.create(response);}
+    public Response create(@PathVariable Integer reflectionId, @RequestBody Response response) {
+        response.reflectionId = reflectionId;
+        return responses.create(response);
+    }
 
-    @GetMapping("/reflections/{reflection_id}/responses")
+    @GetMapping("/reflections/{reflectionId}/responses")
     public List<Response> index() {return responses.all();}
 }
