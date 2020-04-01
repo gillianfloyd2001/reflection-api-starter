@@ -44,6 +44,12 @@ public class AnswerRepository {
         return jdbc.queryForObject("SELECT * FROM answers WHERE id = ?", this::mapper, id);
     };
 
+    public List<Answer> forResponse(Integer responseId) {
+        return jdbc.query(
+                "SELECT * FROM answers WHERE response_id = ?", this::mapper, responseId
+        );
+    };
+
 
     private Answer mapper(ResultSet resultSet, int i) throws SQLException {
         return new Answer(
@@ -53,4 +59,5 @@ public class AnswerRepository {
                 resultSet.getString("content")
         );
     };
+
 }

@@ -6,11 +6,11 @@ public class Response {
     public Integer id;
     public String userUsername;
     public Integer reflectionId;
-    public List<Object> answers;
+    public List<Answer> answers;
 
     public Response() {};
 
-    public  Response(Integer id, String userName, Integer reflectionId, List<Object> answers) {
+    public  Response(Integer id, String userName, Integer reflectionId, List<Answer> answers) {
         this.id = id;
         this.userUsername = userName;
         this.reflectionId = reflectionId;

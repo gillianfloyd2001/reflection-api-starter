@@ -14,8 +14,9 @@ public class ResponseRepository {
     @Autowired
     public JdbcTemplate jdbc;
 
-    public List<Response> all(){return jdbc.query("SELECT * FROM responses", this::mapper);}
-
+    public List<Response> getResponses(Integer reflectionId) {
+        return jdbc.query("SELECT * FROM responses WHERE reflection_id = ?", this::mapper, reflectionId);
+    }
     public Response create(Response response) {
         var sql = "INSERT INTO responses (username, reflection_id) VALUES (?, ?) RETURNING *";
         return jdbc.queryForObject(sql, this::mapper, response.userUsername, response.reflectionId);
@@ -28,5 +29,5 @@ public class ResponseRepository {
                 resultSet.getInt("reflection_id"),
                 null
         );
-    }
+    };
 }

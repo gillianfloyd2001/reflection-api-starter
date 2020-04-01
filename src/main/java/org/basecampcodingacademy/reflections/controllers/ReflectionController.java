@@ -38,7 +38,7 @@ public class ReflectionController {
         var reflection =  reflections.find(LocalDate.now());
         if (include.equals("questions")) {
             reflection.questions = questions.forReflection(reflection.id);
-        }
+        };
         return reflection;
     }
 
